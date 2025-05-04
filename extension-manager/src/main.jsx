@@ -9,7 +9,8 @@ import List from "./_components/List.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <NavbarUpper />
-    <Navbarsecond />
-    <List />
+    {/* <Navbarsecond /> */}
+    {/* <List /> */}
+    <App />
   </StrictMode>
 );

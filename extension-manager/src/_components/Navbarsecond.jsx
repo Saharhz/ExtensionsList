@@ -1,22 +1,9 @@
 import React, { useState } from "react";
-import data from "../data.json";
 
-export default function Navbarsecond() {
-  const [items, setItems] = useState(data);
-  const [selected, isSelected] = useState(true);
-
-  function filter(value) {
-    if (value == "active") {
-      setItems(data.filter((element) => element.isActive));
-    }
-    if (value == "inactive") {
-      setItems(data.filter((element) => !element.isActive));
-    } else {
-      if (value == "all") {
-        setItems(data);
-      }
-    }
-    isSelected(value);
+export default function Navbarsecond({ selected, onFilter }) {
+  if (typeof onFilter !== "function") {
+    console.error("onFilter is not a function!", onFilter);
+    console.log("onFilter type:", typeof onFilter);
   }
 
   return (
@@ -31,7 +18,7 @@ export default function Navbarsecond() {
               selected == "all" ? "hsl(3,77%,44%)" : "hsl(200,60%,99%)",
           }}
           className="bg-[hsl(200,60%,99%)] rounded-3xl px-5 py-2 mb-2"
-          onClick={() => filter("all")}
+          onClick={() => onFilter("all")}
         >
           All
         </button>
@@ -41,7 +28,7 @@ export default function Navbarsecond() {
               selected == "active" ? "hsl(3,77%,44%)" : "hsl(200,60%,99%)",
           }}
           className="bg-[hsl(200,60%,99%)] rounded-3xl px-4 py-2 mb-2"
-          onClick={() => filter("active")}
+          onClick={() => onFilter("active")}
         >
           Active
         </button>
@@ -50,8 +37,8 @@ export default function Navbarsecond() {
             backgroundColor:
               selected == "inactive" ? "hsl(3,77%,44%)" : "hsl(200,60%,99%)",
           }}
-          className="bg-[hsl(200,60%,99%)] rounded-3xl px-4 py-2 mb-2 hover:bg-[hsl(3,77%,44%)]"
-          onClick={() => filter("inactive")}
+          className="bg-[hsl(200,60%,99%)] rounded-3xl px-4 py-2 mb-2"
+          onClick={() => onFilter("inactive")}
         >
           Inactive
         </button>
